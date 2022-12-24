@@ -278,6 +278,8 @@
 
         <?= session()->getFlashdata('error') ?>
         <?= service('validation')->listErrors() ?>
+        
+        <p><?= session()->getFlashdata('msg') ?></p><br>
 
         <form action="/categories/create" method="post">
             <?= csrf_field() ?>
@@ -297,7 +299,7 @@
 
             <br /><br />
 
-            <input type="submit" name="submit" value="Create news item" />
+            <input type="submit" name="submit" value="Create news Categories" />
         </form>
 
     </section>
