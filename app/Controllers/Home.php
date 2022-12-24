@@ -14,7 +14,18 @@ class Home extends BaseController
 
     public function index()
     {
-        return view('welcome_message');
+        $model = new Categories();
+
+        $query = $model->query('SELECT sub_category.id as s_id, sub_category.name as s_cat_name, p_category.name as p_cat_name 
+        FROM categories sub_category 
+        LEFT JOIN categories p_category ON p_category.id = sub_category.parent_id 
+        ORDER BY sub_category.id');
+
+        $data = $query->getResult();
+
+        return view('welcome_message', [
+            'data' => $data,
+        ]);
     }
 
     public function viewForm()
@@ -94,6 +105,8 @@ class Home extends BaseController
                 'name' => $subCategory,
                 'parent_id' => null,
             ])->find();
+
+            return $existingMainCategory;
         }
     }
 

@@ -300,6 +300,10 @@
             <br /><br />
 
             <input type="submit" name="submit" value="Create news Categories" />
+
+            <br><br>
+
+            <a href="/">Go To Home</a>
         </form>
 
     </section>
