@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-
-use CodeIgniter\HTTP\Request;
 use App\Models\Categories;
-use CodeIgniter\Session\Session;
 
 class Home extends BaseController
 {
@@ -16,23 +13,14 @@ class Home extends BaseController
     {
         $model = new Categories();
 
-        $query = $model->query('SELECT sub_category.id as s_id, sub_category.name as s_cat_name, p_category.name as p_cat_name 
-        FROM categories sub_category 
-        LEFT JOIN categories p_category ON p_category.id = sub_category.parent_id 
-        ORDER BY sub_category.id');
-
-        $data = $query->getResult();
-
         return view('welcome_message', [
-            'data' => $data,
+            'data' => $model->getCategoriesList(),
         ]);
     }
 
     public function viewForm()
     {
         $model = new Categories();
-
-        //return redirect()->back();
 
         $mainCategories = $model->select(['id', 'name'])->where('parent_id', null)->findAll();
 
